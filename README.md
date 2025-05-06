@@ -72,6 +72,6 @@ Client PC → Palo Alto Firewall 1 → ISP Router → Palo Alto Firewall 2 → L
 
 ## 🔗 Author
 Harsh Bakale 
-📧 harsh.s.bakale@example.com  
+📧 harsh.s.bakale@gmail.com
 💼 https://www.linkedin.com/in/harsh-bakale-996746282/ 
 
