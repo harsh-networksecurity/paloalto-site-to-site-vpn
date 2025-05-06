@@ -1,0 +1,61 @@
+===============================================================
+           HOW TO ACCESS PALO ALTO FIREWALL GUI (EVE-NG)
+===============================================================
+
+✅ SCENARIO:
+- Using EVE-NG for lab setup
+- NAT cloud is connected to Palo Alto firewall
+- Your PC will access GUI via browser
+- You’ll assign an IP from the NAT range (usually 192.168.200.0/24)
+
+---------------------------------------------------------------
+🔧 STEP-BY-STEP GUIDE TO ENABLE GUI ACCESS
+---------------------------------------------------------------
+
+1️⃣  Login to the Palo Alto Firewall CLI Console:
+    pa-vm> username : admin
+    pa-vm> password : admin <default>
+   pa-vm> enter old password : admin
+   pa-vm> enter new password : <user defined>
+
+
+
+2️⃣  Enter configuration mode:
+    > configure
+
+3️⃣  Set management interface IP address:
+    (Use any IP from EVE-NG NAT range eg. 192.168.200.x)
+
+   #delete deviceconfig system type dhcp-client (we'll delete dhcp-client so we dont have give ip evertime and we can procced with static ip everytime directly)
+  #commit
+  #set deviceconfig system ip-address <static-ip>  netmask <subnet-mask>
+  #commit
+
+5️⃣  Open a web browser in your PC (Windows/Mac/Linux):
+    🔗 https://<Static-ip you given>
+note- browser will show not a secure connection select proceed anyway
+
+6️⃣  Login with GUI credentials:
+    👤 Username: admin  
+    🔒 Password:<you defined>
+
+---------------------------------------------------------------
+✅ TIPS:
+- Make sure the EVE-NG NAT cloud is connected to the MGMT interface (`mgmt`)
+- If not working, ping the firewall from your PC first.
+- You can also SSH into the firewall using the same IP if SSH is enabled.
+
+---------------------------------------------------------------
+📌 NOTES:
+- You **must use an IP from NAT cloud range**. Check `ifconfig` on host or assign manually like `192.168.200.100`
+- Default Gateway of EVE-NG NAT cloud is always: `192.168.200.1`
+
+---------------------------------------------------------------
+💬 Example NAT Assignment in EVE-NG Topology:
+- NAT cloud ↔ mgmt int of Firewall
+- Assigned IP: 192.168.200.100 / ip-rang of you NAT
+- GUI Access URL: http://192.168.200.100 / ip you given to mgmt int
+
+---------------------------------------------------------------
+END OF GUIDE
+===============================================================
