@@ -4,6 +4,8 @@
 
 Client PC → Palo Alto Firewall 1 → ISP Router → Palo Alto Firewall 2 → Linux Router (Server)
 
+Inshort over-view of what we are going to configure >>>
+
 ## 🌐 IP Addressing
 
 | Device/Interface         | IP Address        |
