@@ -1,0 +1,7 @@
+NOTE- 
+
+> These are the screenshots of the paloalto-1 firewall
+
+> Paloalto-2 firewall configuration will be same just changes will in IP addresses .
+
+> VPN configuration will remain exactly same for both of them

@@ -1,0 +1,154 @@
+🔧 PaloAlto1 GUI Configuration – 
+-------------------------------------------
+
+1. Interfaces Configuration
+
+Go to: Network > Interfaces
+
+Configure ethernet1/1:
+
+Interface Type: Layer3
+
+IP: 1.1.1.1/24
+
+Zone: outside
+
+Configure ethernet1/2:
+
+Interface Type: Layer3
+
+IP: 192.168.1.100/24
+
+Zone: inside
+
+Configure tunnel.1:
+
+IP: 172.16.1.1/24
+
+Virtual Router: default
+
+Zone: vpn
+
+--------------------------------------------
+
+2. IKE Crypto Profile
+
+Go to: Network > Network Profiles > IKE Crypto
+
+Name: ike-crypto-profile
+
+DH Group: group20
+
+Encryption: aes-128-gcm
+
+Authentication: none
+
+---------------------------------------------
+
+3. IPSec Crypto Profile
+Go to: Network > Network Profiles > IPSec Crypto
+
+Name: ipsec-crypto-profile
+
+ESP Encryption: aes-128-gcm
+
+Authentication: none
+
+DH Group: group20
+
+---------------------------------------------
+
+4. IKE Gateway
+Go to: Network > IKE Gateways
+
+Name: ike-gateway
+
+Version: IKEv2 only
+
+Interface: ethernet1/1
+
+Local IP: 1.1.1.1
+
+Peer IP: 2.2.2.2
+
+Pre-shared Key: 12345678
+
+IKE Crypto Profile: ike-crypto-profile
+
+---------------------------------------------
+
+5. IPSec Tunnel
+Go to: Network > IPSec Tunnels
+
+Name: ipsec-tunnel
+
+IKE Gateway: ike-gateway
+
+IPSec Crypto Profile: ipsec-crypto-profile
+
+Tunnel Interface: tunnel.1
+
+-----------------------------------------------
+
+6. Static Routes (Virtual Router)
+Go to: Network > Virtual Routers > default > Static Routes
+
+Add Route:
+
+Name: default-route
+
+Destination: 0.0.0.0/0
+
+Interface: ethernet1/1
+
+Next Hop: 1.1.1.2
+
+Add Route:
+
+Name: VPN-route
+
+Destination: 192.168.2.0/24
+
+Interface: tunnel.1
+
+Next Hop: 172.16.1.2
+
+--------------------------------------------------
+
+7. Zones
+Go to: Network > Zones
+
+Create/verify:
+
+inside → Interface: ethernet1/2
+
+outside → Interface: ethernet1/1
+
+vpn → Interface: tunnel.1
+
+--------------------------------------------------
+
+8. Security Policies
+Go to: Policies > Security
+
+Add Rule: inside-to-out
+
+Source Zone: inside
+
+Destination Zone: outside
+
+Application: any
+
+Action: allow
+
+Add Rule: HTTP-service
+
+Source Zone: inside
+
+Destination Zone: vpn
+
+Application: ssh, telnet, web-browsing
+
+Action: allow
+
+--------------------------------------------------
