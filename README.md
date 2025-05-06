@@ -1,4 +1,4 @@
-# Palo Alto Site-to-Site VPN Project - Harsh-networksecurity
+# Palo Alto Site-to-Site VPN Project - harsh-networksecurity
 
 ## 🧩 Topology
 
